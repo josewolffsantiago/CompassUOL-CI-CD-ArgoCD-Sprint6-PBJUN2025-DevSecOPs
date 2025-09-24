@@ -1,0 +1,10 @@
+image:
+  repository: josesantiagowolff/hello-app
+  tag: latest
+  pullPolicy: IfNotPresent
+
+namespace: hello-app
+
+service:
+  type: ClusterIP
+  port: 8000
