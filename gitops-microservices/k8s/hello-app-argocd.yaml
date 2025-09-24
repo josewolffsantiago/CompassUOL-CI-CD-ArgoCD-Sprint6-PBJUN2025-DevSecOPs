@@ -6,12 +6,12 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/your-name/your-repo.git
+    repoURL: https://github.com/josewolffsantiago/CompassUOL-CI-CD-ArgoCD-Sprint6-PBJUN2025-DevSecOPs.git
     path: /gitops-microservices/k8s
     targetRevision: HEAD
-    #helm:
-     # valueFiles:
-      #  - values.yaml
+    helm:
+     valueFiles:
+       - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: hello-app
