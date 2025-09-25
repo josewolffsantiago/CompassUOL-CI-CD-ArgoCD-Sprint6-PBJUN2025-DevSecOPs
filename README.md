@@ -37,26 +37,23 @@ Continuous Integration(CI): O GitHub Actions detecta o envio, constrói uma imag
 
 Continuous Delivery (CD): O Argo CD, que monitora constantemente o repositório Git, percebe a atualização da tag da imagem nos arquivos de manifesto e automaticamente sincroniza essa nova versão com o cluster Kubernetes, atualizando a aplicação em produção.
 
-Basicamente, é um fluxo onde os repositórios Git comandam todo o processo de forma automatizada:
+[CI e GitHub Actions/](https://github.com/josewolffsantiago/-CompassUOL-CI-CD-com-o-Github-Actions-Sprint6-PBJUN2025-DevSecOPs)
+            
+            ├── .github/
+            │   └── workflows/
+            │       └── 01-push-dockerhub.yaml
+            ├── hello-app/
+            │       └── main/
+            │           ├── main.py
+            │           ├── Dockerfile
+            │           └── requirements.txt
 
-Git Push → Build da Imagem (CI) → Atualização no K8s (CD)
-
-
-        [CI e GitHub Actions/](https://github.com/josewolffsantiago/-CompassUOL-CI-CD-com-o-Github-Actions-Sprint6-PBJUN2025-DevSecOPs)
-        ├── .github/
-        │   └── workflows/
-        │       └── 01-push-dockerhub.yaml
-        ├── hello-app/
-        │       └── main/
-        │           ├── main.py
-        │           ├── Dockerfile
-        │           └── requirements.txt
-
-        [ArgoCD - Kubernet/](https://github.com/josewolffsantiago/CompassUOL-CI-CD-ArgoCD-Sprint6-PBJUN2025-DevSecOPs)
-        ├── gitops-microservices
-        │    └── k8s
-        │        ├── deployment.yaml
-        │        └── service.yaml
+[ArgoCD - Kubernet/](https://github.com/josewolffsantiago/CompassUOL-CI-CD-ArgoCD-Sprint6-PBJUN2025-DevSecOPs)
+            
+            ├── gitops-microservices
+            │    └── k8s
+            │        ├── deployment.yaml
+            │        └── service.yaml
 
 ### 2.1. Repositório Git (GitHub):
 
