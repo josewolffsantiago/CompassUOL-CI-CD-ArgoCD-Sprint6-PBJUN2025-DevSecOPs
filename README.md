@@ -142,7 +142,14 @@ Precisamos dockerizar a nossa aplicação. Estes arquivos estão todos prontos e
 
 #### 3.4.1. Criação do main.py
 
-Apenas um arquivo com um Hello Word em Python. Salve ele com o nome main.py na pasta ~/hello-app/main
+            ├── hello-app/
+            │       └── main/
+            │           ├── main.py
+            │           ├── Dockerfile
+            │           └── requirements.txt
+
+
+Apenas um arquivo com um Hello Word em Python. Salve ele com o nome main.py na pasta ~/hello-app/main (Exemplo)
 
 
             from fastapi import FastAPI
@@ -155,4 +162,66 @@ Verifica que ele carrega um Framework chamado FastApi para a execução deste c�
 
 #### 3.4.2. Arquivo Dockerfile
 
-Crie um arquivo na 
+Crie um arquivo chamado Dockerfile na mesma pasta do arquivo main.py
+
+            FROM python:3.9-slim-buster
+            WORKDIR /app
+            COPY requirements.txt .
+            RUN pip install --no-cache-dir -r requirements.txt
+            COPY . .
+            EXPOSE 8000
+
+            CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+O FROM é a imagem que o Docker (No nosso caso o Rancher) irá puxar para rodar a nossa aplicação. O arquivo requeriments.txt também deverá ser criado. Neste arquivo que irá conter todos os componentes que irão ser instalados no nosso Sistema dentro do Container.
+
+            fastapi
+            uvicorn
+
+Olha o fastapi dentro do arquivo requeriments.txt - Todos os componentes colocado neste arquivo serão instalados dentro do container.
+
+
+#### 3.4.2. Workflow Github Actions
+
+Para operar com o Github Actions devemos criar uma sequencia de pasta, como neste exemplo abaixo:
+
+            ├── .github/
+            │   └── workflows/
+            │       └── 01-push-dockerhub.yaml
+
+O que é mais importante no código do GH Actions é a atualização do arquivo deployment.yaml, na qual ele sempre irá atualizar a TAG conforme a atualização do repositório, deixando o nosso aplicativo sempre atualizado. O main.py também está sendo atualizado, contendo a mesma TAG da imagem do DockerHub.
+
+------------------
+
+## 4. Evidências do funcionamento do código
+
+#### 4.1. Build e push Dockerhub
+
+![Docker HUB](/imgs/Docker%20HUB.png)
+
+#### 4.2. Atualização automática do deployment.yaml e main.py com a nova TAG da imagem
+
+![TAG Deployment](/imgs/manifest%20-%20Github.png)
+
+![TAG Python code](/imgs/Main.py%20-%20Github.png)
+
+#### 4.3. ArgoCD com a aplicação em Healthy
+
+![ARGOCD Healthy](/imgs/ArgoCD%20-%20Hello%20app.png)
+
+#### 4.4. Navegador mostrando a mensagem Hello Word
+
+![Navegador](/imgs/Navegador%20-%20hello%20world.png)
+
+
+------------------
+
+## 5. Referências
+
+[Como Dockerizar um app Python](https://dev.to/bravinsimiyu/how-to-dockerize-and-deploy-a-fast-api-application-to-kubernetes-cluster-35a9)
+
+[Docker Setup com aplicação FastApi](https://www.youtube.com/watch?v=DA6gywtTLL8&t=380s)
+
+[Documentação da própria GitHUB sobre como criar container usando o Github Actions](https://docs.github.com/pt/actions/tutorials/use-containerized-services/create-a-docker-container-action)
+
+[Artigo sobre como criar uma aplicação FastAPI usando Argo e Kubernetes](https://medium.com/@ons.arouriii/deploying-a-fastapi-application-with-argo-cd-in-a-kubernetes-cluster-8900e610987a)
