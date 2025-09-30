@@ -5,6 +5,13 @@ metadata:
 spec:
   selector:
     app: fast-api
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
+  namespaceSelector:
+    matchNames:
+      - default
   ports:
   - port: 8000
     targetPort: 8000
