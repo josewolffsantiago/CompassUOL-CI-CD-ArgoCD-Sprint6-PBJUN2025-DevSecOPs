@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: fast-api
-  namespace: argocd
+  name: hello-app
+  namespace: hello-app
 spec:
   project: default
   source:
