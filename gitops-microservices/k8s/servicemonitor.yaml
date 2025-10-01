@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: fast-api
+  name: fast-api-monitor
   labels:
     release: monitoring  # must match your Prometheus release name
 spec:
@@ -14,4 +14,4 @@ spec:
       interval: 15s
   namespaceSelector:
     matchNames:
-      - default
+      - hello-app

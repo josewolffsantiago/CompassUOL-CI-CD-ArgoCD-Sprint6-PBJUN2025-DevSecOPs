@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fast-api
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/josewolffsantiago/CompassUOL-CI-CD-ArgoCD-Sprint6-PBJUN2025-DevSecOPs.git
+    targetRevision: HEAD
+    path: gitops-microservices/k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: hello-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

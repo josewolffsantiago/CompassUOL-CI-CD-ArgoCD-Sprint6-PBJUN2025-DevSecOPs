@@ -11,7 +11,7 @@ spec:
       interval: 15s
   namespaceSelector:
     matchNames:
-      - default
+      - hello-app
   ports:
   - port: 8000
     targetPort: 8000
