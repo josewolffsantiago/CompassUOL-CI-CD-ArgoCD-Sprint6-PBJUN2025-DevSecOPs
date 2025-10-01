@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: fast-api
-        image: josesantiagowolff/hello-app:v2
+        image: josesantiagowolff/hello-app:d2afd2c1d1fcb07d5ca22390714dd9ab043618ec
         resources:
           limits:
             memory: "256Mi"          
